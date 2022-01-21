@@ -1,12 +1,12 @@
 import { shallowMount } from '@vue/test-utils'
-import HelloWorld from '@/components/HelloWorld.vue'
+import ShowCard from '@/components/ShowCard.vue'
 
-describe('HelloWorld.vue', () => {
-  it('renders props.msg when passed', () => {
-    const msg = 'new message'
-    const wrapper = shallowMount(HelloWorld, {
-      propsData: { msg }
+describe('ShowCard.vue', () => {
+  it('renders props.movieDetails when passed', () => {
+    const movieDetails = {'name':"xyz", 'genres':['drama'], 'id':'758g877', 'rating':"{'average':'8'}", 'image':{'medium':'http//xyuz.png'}}
+    const wrapper = shallowMount(ShowCard, {
+      propsData: { movieDetails }
     })
-    expect(wrapper.text()).toMatch(msg)
+    expect(wrapper.text()).toMatch(movieDetails)
   })
 })

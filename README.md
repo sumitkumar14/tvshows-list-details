@@ -4,6 +4,14 @@
 ```
 npm install
 ```
+### node Version
+```
+v14.17.1
+```
+### node Version
+```
+7.20.6
+```
 
 ### Compiles and hot-reloads for development
 ```
