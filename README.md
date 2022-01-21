@@ -4,11 +4,11 @@
 ```
 npm install
 ```
-### node Version
+### Node Version
 ```
 v14.17.1
 ```
-### node Version
+### Npm Version
 ```
 7.20.6
 ```

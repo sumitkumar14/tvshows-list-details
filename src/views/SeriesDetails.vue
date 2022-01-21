@@ -73,7 +73,7 @@
 import SeriesService from '@/seriesService/tv-service.js';
 const SeriesService1=new SeriesService();
 export default {
-  name:'About',
+  name:'SeriesDetails',
   data(){
     return{
       showDetails:{},

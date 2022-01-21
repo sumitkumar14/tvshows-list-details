@@ -35,7 +35,7 @@ import SeriesService from '@/seriesService/tv-service.js';
 const SeriesService1=new SeriesService();
 
 export default {
-  name: "Home",
+  name: "SeriesList",
   components: {
     ShowCard,
   },
@@ -63,7 +63,7 @@ export default {
     },
     searchedShowData(val) {
       this.showsData = [];
-      SeriesService1.seriesList(val).then((response) => {
+      SeriesService1.serachList(val).then((response) => {
           this.showsData.push(response.data);
         })
         .catch((error) => {
