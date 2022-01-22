@@ -14,12 +14,8 @@
         </v-icon>
       </v-btn> -->
       <v-row no-gutters>
-        <figure>
-          <img alt :src="showDetails.image.medium" />
-           <p><b>{{ showDetails.name }}</b></p>
-          <figcaption>
-          </figcaption>
-        </figure>
+        <ShowCard :movieDetails="showDetails">
+        </ShowCard>
       </v-row>
       <v-row no-gutters>
         <v-spacer></v-spacer>
@@ -28,53 +24,23 @@
           >{{ showDetails.rating.average/2 }}/5
         </v-col>
       </v-row>
-      <v-row>
-        <v-col class="ml-4">
           <v-row>
             <h5 v-html="showDetails.summary"></h5>
           </v-row>
           <v-row>
-        <div>
           <h5 class="card-title" style="color: black;">Show Info</h5>
           <p class="card-subtitle mb-2 text-muted "><b >Network :</b>
             {{showDetails.network.country.name}}</p>
           <p ><b >Language :</b> {{showDetails.language}}</p>
           <p ><b>Status :</b> {{showDetails.status}}</p>
           <p ><b>Show Type :</b> {{showDetails.type}}</p>
+          <p ><b>Run Time:</b>&nbsp;{{ showDetails.runtime }}</p>
+           <div><b>Premiered:</b>&nbsp;{{ showDetails.premiered }}</div>
+           <div><b>Weight:</b>&nbsp;{{ showDetails.weight }}</div>
           <p ><b >Official URL :</b> <a
               style="word-wrap: break-all;"> {{showDetails.officialSite}}</a></p>
           <p><b style="color: black;">Genres :</b> {{ showDetails.genres.join(", ") }} </p>
 
-        </div>
-            <div><b>Run Time:</b>&nbsp;{{ showDetails.runtime }}</div>
-          </v-row>
-          <v-row>
-            <div><b>Status:</b>&nbsp;{{ showDetails.status }}</div>
-          </v-row>
-          <v-row>
-            <div><b>Type:</b>&nbsp;{{ showDetails.type }}</div>
-          </v-row>
-          <v-row>
-            <div><b>Ended:</b>&nbsp;{{ showDetails.ended }}</div>
-          </v-row>
-          <v-row>
-            <div><b>Premiered:</b>&nbsp;{{ showDetails.premiered }}</div>
-          </v-row>
-          <v-row>
-            <div><b>externals:</b>&nbsp;{{ showDetails.externals }}</div>
-          </v-row>
-          <v-row>
-            <div><b>Network:</b>&nbsp;{{ showDetails.network }}</div>
-          </v-row>
-          <v-row>
-            <div><b>Schedule:</b>&nbsp;{{ showDetails.schedule }}</div>
-          </v-row>
-           <b>Genres:</b>&nbsp;{{ showDetails.genres.join(", ") }}
-          <v-row>
-            <a target="_blank" :href="showDetails.officialSite"
-              >official Site</a
-            >
-          </v-row>
           <v-row>
             <a
               target="_blank"
@@ -89,8 +55,37 @@
             <div><b>Weight:</b>&nbsp;{{ showDetails.weight }}</div>
           </v-row>
           <v-row>
+            <v-col cols="12">Episodes</v-col>
+            <table
+              class="table table-striped"
+              style="background-color: white; width: 80%"
+            >
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th >Air Date</th>
+                  <th>Run time</th>
+                  <th>Rating</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(episode, i) in paginateData" :key="i">
+                  <td>{{ episode.name }}</td>
+                  <td>{{ episode.airdate }}</td>
+                  <td>{{ episode.runtime }}</td>
+                  <td>
+                    <div class="pt-2">
+                       {{
+                        episode.rating.average ? episode.rating.average / 2 : 0
+                      }}/5
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </v-row>
+          <v-row>
             <h4>Cast Details</h4>
-            <div class="row">
               <div
                 class="col-md-2"
                 v-for="(cast, i) in initial_castDetail"
@@ -113,7 +108,6 @@
                   </div>
                 </div>
               </div>
-            </div>
             <v-btn
               @click="viewMoreLessCast()"
               small
@@ -128,51 +122,18 @@
               }}</b></v-btn
             >
           </v-row>
-          <v-row>
-            <v-col cols="12">Episodes</v-col>
-            <table
-              class="table table-striped"
-              style="background-color: white; width: 80%"
-            >
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th >Air Date</th>
-                  <th>Run time</th>
-                  <th>Rating</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="(episode, i) in paginateData" :key="i">
-                  <td>{{ episode.name }}</td>
-                  <td>{{ episode.airdate }}</td>
-                  <td>{{ episode.runtime }}</td>
-                  <td>
-                    <!-- <v-rating
-                      v-model="scaleRating"
-                      readonly
-                      half-increments
-                    ></v-rating> -->
-                    <div class="pt-2">
-                      {{
-                        episode.rating.average ? episode.rating.average / 2 : 0
-                      }}/5
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </v-row>
-        </v-col>
-      </v-row>
+     
+    </v-row>
     </v-row>
   </v-container>
 </template>
 <script>
+import ShowCard from "../components/ShowCard";
 import SeriesService from "@/seriesService/tv-service.js";
 const SeriesService1 = new SeriesService();
 export default {
   name: "SeriesDetails",
+  components:{ShowCard},
   data() {
     return {
       showDetails: {},

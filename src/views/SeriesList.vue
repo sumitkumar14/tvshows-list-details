@@ -95,7 +95,7 @@ const SeriesService1 = new SeriesService();
 export default {
   name: "SeriesList",
   components: {
-    ShowCard,
+    ShowCard
   },
   data() {
     return {
