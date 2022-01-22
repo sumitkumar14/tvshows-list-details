@@ -6,11 +6,9 @@
       dark
     >
       <div class="d-flex align-center">
+        <h2>Amazing TV Shows</h2>
       </div>
-
-      <v-spacer></v-spacer>
     </v-app-bar>
-
     <v-main>
       <router-view/>
     </v-main>

@@ -1,14 +1,12 @@
 <template>
   <v-card v-if="movieDetails && Object.keys(movieDetails).length " @click="moveTodetails(movieDetails.id)" class="ma-0">
     <v-row no-gutters class="text-center">
-      <v-col class="mb-5" cols="12">
-        <figure>
-          <img alt :src="movieDetails.image.medium" />
-          <figcaption>{{ movieDetails.genres.join(", ") }}</figcaption>
-        </figure>
+      <v-col cols="12">
+          <v-img  alt :src="movieDetails.image.medium" />
+          <div><b>{{movieDetails.name}}</b></div>
+          <v-rating v-model="scaleRating" readonly half-increments></v-rating><div> {{ movieDetails.rating.average?(movieDetails.rating.average/2).toFixed(1):0 }}/5</div>
       </v-col>
-      <v-rating v-model="scaleRating" readonly half-increments></v-rating><div class="pt-2"> {{ movieDetails.rating.average }}/10</div>
-    </v-row>
+      </v-row>
   </v-card>
 </template>
 
@@ -16,8 +14,7 @@
 export default {
   name: "ShowCard",
   props: {
-    movieDetails: Object,
-    msg:''
+    movieDetails: Object
   },
   data: () => ({}),
   computed: {
