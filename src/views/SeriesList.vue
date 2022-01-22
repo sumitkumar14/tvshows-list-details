@@ -1,8 +1,7 @@
 <template>
   <v-container fluid class="px-4 mt-2">
     <v-row justify="space-around" align="center" no-gutters>
-      <!-- <v-col xs="12" sm="12" md="4"></v-col> -->
-      <v-col xs="12" sm="12" md="3">
+      <v-col xs="12" sm="12" md="4">
         <v-text-field
           outlined
           v-model="SearchedShow"
@@ -17,17 +16,21 @@
       </v-col>
     </v-row>
     <v-template v-if="!SearchedShow.length">
-      <v-row class="mt-2" no-gutters>
+      <v-row no-gutters>
         <v-expansion-panels>
-          <v-expansion-panel
+          <v-expansion-panel  class="mt-4"
             @click.once="getDiffGenresShows"
             v-for="(item, i) in differentGenres"
             :key="i"
           >
-            <v-expansion-panel-header @click="getDramaShows()"
-              ><h3>{{ item.label }}</h3></v-expansion-panel-header
+            <v-expansion-panel-header style="background-color:#1976d2 !important" height="150" @click="getDramaShows()"
+              ><h2 class="white--text">{{ item.label }}</h2><template v-slot:actions>
+            <v-icon color="white">
+              $expand
+            </v-icon>
+          </template></v-expansion-panel-header
             >
-            <v-expansion-panel-content>
+            <v-expansion-panel-content class="pt-4">
               <v-row>
                 <v-col
                   v-for="show in item.filterdShows"

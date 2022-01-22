@@ -3,8 +3,8 @@
     <v-row no-gutters class="text-center">
       <v-col cols="12">
           <v-img  alt :src="movieDetails.image.medium" />
-          <div><b>{{movieDetails.name}}</b></div>
-          <v-rating v-model="scaleRating" readonly half-increments></v-rating><div> {{ movieDetails.rating.average?(movieDetails.rating.average/2).toFixed(1):0 }}/5</div>
+          <div class="mt-1"><b>{{movieDetails.name}}</b></div>
+          <v-rating color="orange" small v-model="scaleRating" readonly half-increments></v-rating><div> <b>{{ movieDetails.rating.average?(movieDetails.rating.average/2).toFixed(1):0 }}/5</b></div>
       </v-col>
       </v-row>
   </v-card>
