@@ -17,6 +17,6 @@ describe('ShowCard.vue', () => {
     const wrapper = shallowMount(ShowCard, {
       propsData: { movieDetails }
     })
-    expect(wrapper.text()).toMatch(movieDetails)
+    expect(wrapper.props().movieDetails).toBe(movieDetails)
   })
 })

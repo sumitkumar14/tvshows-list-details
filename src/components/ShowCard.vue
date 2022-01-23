@@ -24,7 +24,7 @@ export default {
   },
   methods: {
     moveTodetails(id1) {
-      const id = id1 ? id1 : 1234;
+      const id = id1 ? id1 : '';
       this.$router.push({ path: `/SeriesDetails/${id}` });
     },
   },
