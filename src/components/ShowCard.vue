@@ -19,7 +19,7 @@ export default {
   data: () => ({}),
   computed: {
     scaleRating: function () {
-      return (this.movieDetails.rating.average/2).toFixed(1);
+      return Number((this.movieDetails.rating.average/2).toFixed(1));
     },
   },
   methods: {

@@ -23,7 +23,7 @@
             v-for="(item, i) in differentGenres"
             :key="i"
           >
-            <v-expansion-panel-header style="background-color:#1976d2 !important" height="150" @click="getDramaShows()"
+            <v-expansion-panel-header style="background-color:#1976d2 !important" height="150"
               ><h2 class="white--text">{{ item.label }}</h2><template v-slot:actions>
             <v-icon color="white">
               $expand

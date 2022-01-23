@@ -20,7 +20,7 @@
       <v-row no-gutters>
         <v-spacer></v-spacer>
         <v-col v-if="showDetails && showDetails.rating && showDetails.rating.average"> 
-          Ratings<v-rating v-model="rating" readonly length="1"></v-rating
+          Ratings<v-rating  readonly length="1"></v-rating
           >{{ showDetails.rating.average/2 }}/5
         </v-col>
       </v-row>
@@ -113,11 +113,9 @@
             <v-btn
               @click="viewMoreLessCast()"
               small
-              flat
               text
               type="text"
-              class="primary"
-              ><b>{{
+              ><b  class="primary">{{
                 enableViewCastButton
                   ? "show more casts..."
                   : "show less casts..."
