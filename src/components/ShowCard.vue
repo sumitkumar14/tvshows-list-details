@@ -1,6 +1,5 @@
 <template>
   <v-card v-if="movieDetails && Object.keys(movieDetails).length " @click="moveTodetails(movieDetails.id)" class="ma-0">
-    {{Object.keys(movieDetails).length}}
     <v-row no-gutters class="text-center">
       <v-col cols="12">
           <v-img  alt :src="movieDetails.image.medium" />
