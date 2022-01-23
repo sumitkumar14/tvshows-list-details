@@ -1,10 +1,11 @@
 <template>
   <v-card v-if="movieDetails && Object.keys(movieDetails).length " @click="moveTodetails(movieDetails.id)" class="ma-0">
+    {{Object.keys(movieDetails).length}}
     <v-row no-gutters class="text-center">
       <v-col cols="12">
           <v-img  alt :src="movieDetails.image.medium" />
           <div class="mt-1"><b>{{movieDetails.name}}</b></div>
-          <v-rating color="orange" small v-model="scaleRating" readonly half-increments></v-rating><div> <b>{{ movieDetails.rating.average?(movieDetails.rating.average/2).toFixed(1):0 }}/5</b></div>
+          <v-rating color="orange" small v-model="scaleRating" readonly half-increments></v-rating><div> <b>{{ movieDetails.rating.average?scaleRating:0 }}/5</b></div>
       </v-col>
       </v-row>
   </v-card>
@@ -19,7 +20,7 @@ export default {
   data: () => ({}),
   computed: {
     scaleRating: function () {
-      return ((this.movieDetails.rating.average * 10) / 100) * 5;
+      return (this.movieDetails.rating.average/2).toFixed(1);
     },
   },
   methods: {

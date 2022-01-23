@@ -19,7 +19,7 @@
       </v-row>
       <v-row no-gutters>
         <v-spacer></v-spacer>
-        <v-col>
+        <v-col v-if="showDetails && showDetails.rating && showDetails.rating.average"> 
           Ratings<v-rating v-model="rating" readonly length="1"></v-rating
           >{{ showDetails.rating.average/2 }}/5
         </v-col>
@@ -29,7 +29,8 @@
           </v-row>
           <v-row>
           <h5 class="card-title" style="color: black;">Show Info</h5>
-          <p class="card-subtitle mb-2 text-muted "><b >Network :</b>
+          <v-card v-if="showDetails && Object.keys(showDetails).length">
+          <p v-if="showDetails.network && showDetails.network.country" class="card-subtitle mb-2 text-muted "><b >Network :</b>
             {{showDetails.network.country.name}}</p>
           <p ><b >Language :</b> {{showDetails.language}}</p>
           <p ><b>Status :</b> {{showDetails.status}}</p>
@@ -40,18 +41,19 @@
           <p ><b >Official URL :</b> <a
               style="word-wrap: break-all;"> {{showDetails.officialSite}}</a></p>
           <p><b style="color: black;">Genres :</b> {{ showDetails.genres.join(", ") }} </p>
+          </v-card>
 
-          <v-row>
+          <v-row v-if="showDetails && showDetails['_links'] && showDetails['_links'].previousepisode">
             <a
               target="_blank"
               :href="showDetails['_links'].previousepisode.href"
               >previous episode</a
             >
           </v-row>
-          <v-row>
+          <v-row v-if="showDetails && showDetails['_links']">
             <a target="_blank" :href="showDetails['_links'].self.href">link</a>
           </v-row>
-          <v-row>
+          <v-row v-if=" showDetails && showDetails.weight">
             <div><b>Weight:</b>&nbsp;{{ showDetails.weight }}</div>
           </v-row>
           <v-row>
@@ -147,13 +149,19 @@ export default {
       collectionSize: 0,
     };
   },
+  computed:{
+    seriesId:function(){
+       return (this.$route && this.$route.params && this.$route.params.showId)?this.$route.params.showId:'';
+     
+    }
+  },
+
   methods: {
     backClick() {
       this.$router.push({ path: "/" });
     },
     detailsfShow() {
-      const id = this.$route.params.showId;
-      SeriesService1.seriesDetails(id)
+      SeriesService1.seriesDetails(this.seriesId)
         .then((response) => {
           this.showDetails = response.data;
         })
@@ -168,7 +176,7 @@ export default {
       );
     },
     getCastingDetails() {
-      SeriesService1.seriesCastDetails(this.$route.params.showId).then(
+      SeriesService1.seriesCastDetails(this.seriesId).then(
         (response) => {
           this.castDetail = response.data;
           this.initial_castDetail = response.data.slice(0, 5);
@@ -182,7 +190,7 @@ export default {
         : this.castDetail;
     },
     getEpisodes() {
-      SeriesService1.seriesEpisodesDetails(this.$route.params.showId).then(
+      SeriesService1.seriesEpisodesDetails(this.seriesId).then(
         (response) => {
           this.episodes = response.data;
           this.collectionSize = this.episodes.length;

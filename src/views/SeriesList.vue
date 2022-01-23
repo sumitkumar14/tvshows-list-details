@@ -15,7 +15,7 @@
         ></v-text-field>
       </v-col>
     </v-row>
-    <v-template v-if="!SearchedShow.length">
+    <span v-if="!SearchedShow.length">
       <v-row no-gutters>
         <v-expansion-panels>
           <v-expansion-panel  class="mt-4"
@@ -46,7 +46,7 @@
           </v-expansion-panel>
         </v-expansion-panels>
       </v-row>
-    </v-template>
+    </span>
     <v-row v-else>
       <v-row v-if="!loading && showsData && showsData.length">
         <v-col
