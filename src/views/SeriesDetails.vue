@@ -1,9 +1,9 @@
 <template>
-  <v-container class="mx-4 mt-4">
+  <v-container fluid class="px-6 mt-2">
     <v-row no-gutters>
-      <!-- <v-btn icon @click="backClick()"
-        class="ma-2"
-        color="orange darken-2"
+      <div class="d-flex" shrink cols="1">
+      <v-btn class="mb-0 mr-1" icon @click="backClick()"
+        color="black"
         dark
       >
         <v-icon
@@ -12,118 +12,144 @@
         >
           mdi-arrow-left
         </v-icon>
-      </v-btn> -->
+      </v-btn>
+      </div>
+      <v-col>
+      <h2 class="mb-2">{{showDetails.name}}</h2>
       <v-row no-gutters>
-        <ShowCard :movieDetails="showDetails">
-        </ShowCard>
-      </v-row>
-      <v-row no-gutters>
-        <v-spacer></v-spacer>
-        <v-col v-if="showDetails && showDetails.rating && showDetails.rating.average"> 
-          Ratings<v-rating  readonly length="1"></v-rating
-          >{{ showDetails.rating.average/2 }}/5
+        <ShowCard class="mr-4" :movieDetails="showDetails"> </ShowCard>
+        <v-col>
+          <v-row no-gutters>
+            <v-col cols="12">
+              <div style="font-size: 19px" v-html="showDetails.summary"></div>
+            </v-col>
+            <v-col cols="12">
+              <v-card
+                class="pa-2"
+                v-if="showDetails && Object.keys(showDetails).length"
+              >
+                <v-card-title class="pl-3 pt-0"> Show Info</v-card-title>
+                <v-row no-gutters>
+                  <p
+                    v-if="showDetails.network && showDetails.network.country"
+                    class="mx-3"
+                  >
+                    <b>Country:</b>&nbsp;{{ showDetails.network.country.name }}
+                  </p>
+                  |
+                  <p
+                    v-if="showDetails.network && showDetails.network.country"
+                    class="mx-3"
+                  >
+                    <b>Network:</b>&nbsp;{{ showDetails.network.name }}
+                  </p>
+                  |
+                  <p class="mx-3">
+                    <b>Language:</b>&nbsp;{{ showDetails.language }}
+                  </p>
+                  |
+                  <p class="mx-3">
+                    <b>Status:</b>&nbsp;{{ showDetails.status }}
+                  </p>
+                  |
+                  <p class="mx-3">
+                    <b>Show Type:</b>&nbsp;{{ showDetails.type }}
+                  </p>
+                  |
+                  <p class="mx-3">
+                    <b>Premiered:</b>&nbsp;{{ showDetails.premiered }}
+                  </p>
+                  |
+                  <p class="mx-3">
+                    <b>Run Time:</b>&nbsp;{{ showDetails.runtime }}
+                  </p>
+                  |
+                  <p class="mx-3">
+                    <b>Official URL :</b>
+                    <a style="word-wrap: break-all">
+                      {{ showDetails.officialSite }}</a
+                    >
+                  </p>
+                  |
+                  <p class="mx-3">
+                    <b style="color: black">Genres :</b>
+                    {{ showDetails.genres.join(", ") }}
+                  </p>
+                </v-row>
+              </v-card>
+            </v-col>
+          </v-row>
         </v-col>
       </v-row>
-          <v-row>
-            <h5 v-html="showDetails.summary"></h5>
-          </v-row>
-          <v-row>
-          <h5 class="card-title" style="color: black;">Show Info</h5>
-          <v-card v-if="showDetails && Object.keys(showDetails).length">
-          <p v-if="showDetails.network && showDetails.network.country" class="card-subtitle mb-2 text-muted "><b >Network :</b>
-            {{showDetails.network.country.name}}</p>
-          <p ><b >Language :</b> {{showDetails.language}}</p>
-          <p ><b>Status :</b> {{showDetails.status}}</p>
-          <p ><b>Show Type :</b> {{showDetails.type}}</p>
-          <p ><b>Run Time:</b>&nbsp;{{ showDetails.runtime }}</p>
-           <div><b>Premiered:</b>&nbsp;{{ showDetails.premiered }}</div>
-           <div><b>Weight:</b>&nbsp;{{ showDetails.weight }}</div>
-          <p ><b >Official URL :</b> <a
-              style="word-wrap: break-all;"> {{showDetails.officialSite}}</a></p>
-          <p><b style="color: black;">Genres :</b> {{ showDetails.genres.join(", ") }} </p>
-          </v-card>
-
-          <v-row v-if="showDetails && showDetails['_links'] && showDetails['_links'].previousepisode">
-            <a
-              target="_blank"
-              :href="showDetails['_links'].previousepisode.href"
-              >previous episode</a
-            >
-          </v-row>
-          <v-row v-if="showDetails && showDetails['_links']">
-            <a target="_blank" :href="showDetails['_links'].self.href">link</a>
-          </v-row>
-          <v-row v-if=" showDetails && showDetails.weight">
-            <div><b>Weight:</b>&nbsp;{{ showDetails.weight }}</div>
-          </v-row>
-          <v-row>
-            <v-col cols="12">Episodes</v-col>
-            <table
-              class="table table-striped"
-              style="background-color: white; width: 80%"
-            >
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th >Air Date</th>
-                  <th>Run time</th>
-                  <th>Rating</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="(episode, i) in paginateData" :key="i">
-                  <td>{{ episode.name }}</td>
-                  <td>{{ episode.airdate }}</td>
-                  <td>{{ episode.runtime }}</td>
-                  <td>
-                    <div class="pt-2">
-                       {{
-                        episode.rating.average ? episode.rating.average / 2 : 0
-                      }}/5
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </v-row>
-          <v-row>
-            <h4>Cast Details</h4>
-              <div
-                class="col-md-2"
-                v-for="(cast, i) in initial_castDetail"
-                :key="i"
-              >
-                <div class="card" style="width: 157px">
-                  <img
-                    alt
-                    style="width: 120px; height: 140px"
-                    :src="cast.person.image.medium"
-                  />
-                  <div style="height: 68px">
-                    <p class="small-text-size">
-                      <b>{{ cast.person.name }}</b>
-                    </p>
-                    <p class="mt-n4 small-text-size">as</p>
-                    <p class="mt-n4 small-text-size">
-                      <b> {{ cast.character.name }}</b>
-                    </p>
-                  </div>
+      <v-row no-gutters>
+        <v-col class="pl-0 ml-0 my-4" cols="12"><h3>Episodes</h3></v-col>
+        <v-row fluid no-gutters>
+         <v-data-table
+    :headers="headers"
+    :items="episodes"
+    :items-per-page="10"
+    class="elevation-1"
+  > <template v-slot:[`item.rating`]="{ item }">
+      <div class="pt-2">
+                 <v-icon
+                 color="yellow"
+          dark
+        >
+          mdi-star
+        </v-icon> {{
+                    item.rating.average  ?(item.rating.average  / 2).toFixed(1) : 0
+                  }}/5
                 </div>
-              </div>
-            <v-btn
-              @click="viewMoreLessCast()"
-              small
-              text
-              type="text"
-              ><b  class="primary">{{
-                enableViewCastButton
-                  ? "show more casts..."
-                  : "show less casts..."
-              }}</b></v-btn
-            >
-          </v-row>
-     
-    </v-row>
+    </template>
+    <template v-slot:[`item._links`]="{ item }">
+      <div class="pt-2">
+                    <a style="word-wrap: break-all">{{item._links.self.href}}</a>
+                  
+                </div>
+    </template>
+    </v-data-table>
+        </v-row>
+      </v-row>
+      <v-col class="pl-0 ml-0 mb-2" cols="12"><h3>Cast Details</h3></v-col>
+      <v-row>
+        <v-col
+          xs="3"
+          sm="3"
+          md="2"
+          v-for="(cast, i) in limitedcastDetail"
+          :key="i"
+        >
+          <v-card class="mx-0 px-0">
+            <v-row no-gutters class="text-center">
+              <v-col cols="12">
+                <v-img alt :src="cast.person.image.medium" />
+                <div>
+                  <p class="small-text-size">
+                    <b>{{ cast.person.name }}</b>
+                  </p>
+                  <p class="mt-n4 small-text-size">as</p>
+                  <p class="mt-n4 small-text-size">
+                    <b> {{ cast.character.name }}</b>
+                  </p>
+                </div>
+              </v-col>
+            </v-row>
+          </v-card>
+        </v-col>
+      </v-row>
+      <v-col class="mt-2" v-if="castDetail.length > 6" cols="12">
+        <v-btn
+          @click="viewMoreLessCast()"
+          class="primary--text"
+          small
+          text
+          type="text"
+          ><b>{{
+            enableViewCastButton ? "show more casts..." : "show less casts..."
+          }}</b></v-btn
+        >
+      </v-col>
+      </v-col>
     </v-row>
   </v-container>
 </template>
@@ -133,31 +159,50 @@ import SeriesService from "@/seriesService/tv-service.js";
 const SeriesService1 = new SeriesService();
 export default {
   name: "SeriesDetails",
-  components:{ShowCard},
+  components: { ShowCard },
   data() {
     return {
+      headers: [
+          {
+            text: 'Name',
+            align: 'start',
+            value: 'name'
+          },
+          { text: 'Season', value: 'season' },
+           { text: 'Air Time', value: 'airtime' },
+            { text: 'Run Time', value: 'runtime' },
+            { text: 'Type', value: 'type' },
+            { text: 'Link', value: '_links' },
+          { text: 'Air Date', value: 'airdate' },
+          { text: 'Run time', value: 'runtime' },
+          { text: 'Ratings', value: 'rating' }
+        ],
       showDetails: {},
       castDetail: [],
       episodes: [],
       paginateData: [],
-      initial_castDetail: [],
+      limitedcastDetail: [],
       enableViewCastButton: true,
       page: 1,
       pageSize: 10,
       collectionSize: 0,
     };
   },
-  computed:{
-    seriesId:function(){
-       return (this.$route && this.$route.params && this.$route.params.showId)?this.$route.params.showId:'';
-     
-    }
+  computed: {
+    seriesId: function () {
+      return this.$route && this.$route.params && this.$route.params.showId
+        ? this.$route.params.showId
+        : "";
+    },
   },
 
   methods: {
     backClick() {
       this.$router.push({ path: "/" });
     },
+
+    /* get api call to fetch the episodes of tv series */
+
     detailsfShow() {
       SeriesService1.seriesDetails(this.seriesId)
         .then((response) => {
@@ -173,28 +218,31 @@ export default {
         (this.page - 1) * this.pageSize + this.pageSize
       );
     },
+
+    /* get api call to fetch the casting details of tv series */
+
     getCastingDetails() {
-      SeriesService1.seriesCastDetails(this.seriesId).then(
-        (response) => {
-          this.castDetail = response.data;
-          this.initial_castDetail = response.data.slice(0, 5);
-        }
-      );
+      SeriesService1.seriesCastDetails(this.seriesId).then((response) => {
+        this.castDetail = response.data;
+        this.limitedcastDetail = response.data.slice(0, 6);
+      });
     },
     viewMoreLessCast() {
+      this.limitedcastDetail = [];
       this.enableViewCastButton = !this.enableViewCastButton;
-      this.initial_castDetail = this.enableViewCastButton
-        ? this.castDetail.slice(0, 5)
+      this.limitedcastDetail = this.enableViewCastButton
+        ? this.castDetail.slice(0, 6)
         : this.castDetail;
     },
+
+    /* get api call to fetch the episodes of tv series */
+
     getEpisodes() {
-      SeriesService1.seriesEpisodesDetails(this.seriesId).then(
-        (response) => {
-          this.episodes = response.data;
-          this.collectionSize = this.episodes.length;
-          this.getPaginatedData();
-        }
-      );
+      SeriesService1.seriesEpisodesDetails(this.seriesId).then((response) => {
+        this.episodes = response.data;
+        this.collectionSize = this.episodes.length;
+        this.getPaginatedData();
+      });
     },
   },
   mounted() {

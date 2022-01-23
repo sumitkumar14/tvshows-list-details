@@ -39,7 +39,7 @@
                   sm="4"
                   md="2"
                 >
-                  <show-card :movieDetails="show" />
+                  <show-card :movieDetails="show" @card-click="cardClickedEvent"/>
                 </v-col>
               </v-row>
             </v-expansion-panel-content>
@@ -56,7 +56,7 @@
           sm="6"
           md="2"
         >
-          <show-card :movieDetails="item" />
+          <show-card :movieDetails="item" @card-click="cardClickedEvent" />
         </v-col>
       </v-row>
       <v-row v-else-if="loading" justify="space-between space-around">
@@ -122,6 +122,9 @@ export default {
     };
   },
   methods: {
+    cardClickedEvent(v){
+        this.$router.push({ path: `/SeriesDetails/${v}` });
+    },
     clearMessage() {
       this.SearchedShow="";
       // this.getTvSeriesData();
