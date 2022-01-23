@@ -60,7 +60,7 @@
                     |
                     <p class="mx-3">
                       <b>Official URL :</b>
-                      <a style="word-wrap: break-all">
+                      <a style="word-wrap: break-all cursor:pointer" :href="showDetails.officialSite">
                         {{ showDetails.officialSite }}</a
                       >
                     </p>
@@ -96,9 +96,9 @@
               </template>
               <template v-slot:[`item._links`]="{ item }">
                 <div class="pt-2">
-                  <a style="word-wrap: break-all">{{
-                    item._links.self.href
-                  }}</a>
+                   <a style="word-wrap: break-all cursor:pointer" :href="item._links.self.href">
+                        {{ item._links.self.href}}</a
+                      >
                 </div>
               </template>
             </v-data-table>
