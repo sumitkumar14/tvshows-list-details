@@ -9,7 +9,7 @@
       <v-col>
         <h2 class="mb-2">{{ showDetails.name }}</h2>
         <v-row no-gutters>
-          <ShowCard class="mr-4" :movieDetails="showDetails"> </ShowCard>
+          <ShowCard class="mr-4" :showInfo="showDetails"> </ShowCard>
           <v-col>
             <v-row no-gutters>
               <v-col cols="12">
@@ -60,14 +60,13 @@
                     |
                     <p class="mx-3">
                       <b>Official URL :</b>
-                      <a style="word-wrap: break-all cursor:pointer" :href="showDetails.officialSite">
+                      <a style="word-wrap: break-all; cursor:pointer" :href="showDetails.officialSite">
                         {{ showDetails.officialSite }}</a
                       >
                     </p>
                     |
                     <p class="mx-3">
-                      <b style="color: black">Genres :</b>
-                      {{ showDetails.genres.join(", ") }}
+                      <b style="color: black">Genres:&nbsp;</b><v-chip class="mr-1" small color="red" v-for="(genre,i) in showDetails.genres" :key="i">{{genre}}</v-chip>
                     </p>
                   </v-row>
                 </v-card>
@@ -84,6 +83,11 @@
               :items-per-page="10"
               class="elevation-1"
             >
+             <template v-slot:[`item.name`]="{ item }">
+                <div class="pt-2">
+                 <b>{{item.name}}</b><v-img class="mb-1" width="80" height="60" alt :src="item.image.medium" />
+                </div>
+              </template>
               <template v-slot:[`item.rating`]="{ item }">
                 <div class="pt-2">
                   <v-icon color="yellow" dark> mdi-star </v-icon>
@@ -96,7 +100,7 @@
               </template>
               <template v-slot:[`item._links`]="{ item }">
                 <div class="pt-2">
-                   <a style="word-wrap: break-all cursor:pointer" :href="item._links.self.href">
+                   <a style="word-wrap: break-all; cursor:pointer" :href="item._links.self.href">
                         {{ item._links.self.href}}</a
                       >
                 </div>
@@ -131,7 +135,7 @@
             </v-card>
           </v-col>
         </v-row>
-        <v-col class="mt-2" v-if="castDetail.length > 6" cols="12">
+        <v-col class="pl-0 mt-2" v-if="castDetail.length > 6" cols="12">
           <v-btn
             @click="viewMoreLessCast()"
             class="primary--text"
@@ -148,8 +152,9 @@
   </v-container>
 </template>
 <script>
-import ShowCard from "../components/ShowCard";
+// import ShowCard from "../components/ShowCard";
 import SeriesService from "@/seriesService/tv-service.js";
+import ShowCard from '../components/ShowCard.vue';
 const SeriesService1 = new SeriesService();
 export default {
   name: "SeriesDetails",
@@ -166,7 +171,6 @@ export default {
         { text: "Air Time", value: "airtime" },
         { text: "Run Time", value: "runtime" },
         { text: "Type", value: "type" },
-        { text: "Link", value: "_links" },
         { text: "Air Date", value: "airdate" },
         { text: "Run time", value: "runtime" },
         { text: "Ratings", value: "rating" },
