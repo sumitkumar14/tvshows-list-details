@@ -334,6 +334,6 @@ export default {
 }
 .episode-name-col {
   min-height: 80px;
-  min-width:160px;
+  min-width:120px;
 }
 </style>
