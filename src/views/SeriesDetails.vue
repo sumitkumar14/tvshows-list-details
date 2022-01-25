@@ -262,7 +262,7 @@ export default {
         })
         .catch((error) => {
           console.log(error);
-        });
+        })
     },
 
     /* get api call to fetch the casting details of tv series */
@@ -273,7 +273,7 @@ export default {
         this.limitedcastDetail = response.data.slice(0, 6);
       }).catch((error) => {
           console.log(error);
-        });;
+        })
     },
     viewMoreLessCast() {
       this.limitedcastDetail = [];
@@ -290,7 +290,7 @@ export default {
         this.episodes = response.data;
       }).catch((error) => {
           console.log(error);
-        });
+        })
     },
   },
   mounted() {
