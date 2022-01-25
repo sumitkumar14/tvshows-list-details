@@ -47,29 +47,25 @@
         </v-expansion-panels>
       </v-row>
     </span>
-    <v-row v-else>
-      <v-row v-if="!loading && searchedshowsData && searchedshowsData.length">
+    <v-row no-gutters class="mt-4" v-else>
+      <v-row  v-if="!loading && searchedshowsData && searchedshowsData.length">
         <v-col
           v-for="item in searchedshowsData[0]"
           :key="item.id"
-          xs="12"
-          sm="6"
+          xs="4"
+          sm="4"
           md="2"
         >
           <show-card :showInfo="item.show" @card-click="cardClickedEvent" />
         </v-col>
       </v-row>
       <v-row v-else-if="loading" justify="space-between space-around">
-        <v-col
-          class="center-text"
-        >
+        <v-col class="center-text">
           <h2>Loading in progress ...</h2>
         </v-col>
       </v-row>
       <v-row v-else justify="space-between space-around">
-        <v-col
-        class="center-text"
-        >
+        <v-col class="center-text">
           <h2>No Data Found</h2>
         </v-col>
       </v-row>
@@ -90,10 +86,17 @@ export default {
   data() {
     return {
       differentGenres: [
+        { label: "War", filterdShows: [] },
         { label: "Comedy", filterdShows: [] },
+        { label: "Thriller", filterdShows: [] },
+        { label: "Adventure", filterdShows: [] },
+        { label: "Action", filterdShows: [] },
+        { label: "Horror", filterdShows: [] },
         { label: "Drama", filterdShows: [] },
         { label: "Family", filterdShows: [] },
         { label: "Romance", filterdShows: [] },
+        { label: "Supernatural", filterdShows: [] },
+        { label: "Science-Fiction", filterdShows: [] },
         { label: "Medical", filterdShows: [] },
         { label: "Crime", filterdShows: [] },
         { label: "Legal", filterdShows: [] },
@@ -142,10 +145,10 @@ export default {
     /* filters for shows on different genres */
 
     getDiffGenresShows() {
-      for(let i=0; i<this.differentGenres.length;i++)
-      this.differentGenres[i].filterdShows = this.showsData.filter((show) =>
-        show.genres.includes(this.differentGenres[i].label)
-      );
+      for (let i = 0; i < this.differentGenres.length; i++)
+        this.differentGenres[i].filterdShows = this.showsData.filter((show) =>
+          show.genres.includes(this.differentGenres[i].label)
+        );
     },
 
     /* api call on search */
@@ -182,10 +185,10 @@ export default {
 .exp-header-background {
   background-color: #1976d2 !important;
 }
-.center-text{
+.center-text {
   height: calc(100vh - 128px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>
