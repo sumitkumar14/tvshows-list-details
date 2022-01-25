@@ -17,13 +17,13 @@ describe('Service Class Testing', () => {
     try{
      const SeriesService1 = new SeriesService();
         const response=await SeriesService1.serachList('b');
-        expect(response.data).toBeInstanceOf(Object)
+        expect(response.data[0]).toBeInstanceOf(Object)
           done();
     } catch(error){
         done.fail(error)
     }
 })
-test ('get details of the series', async(done)=>{
+test ('api to get details of the series', async(done)=>{
     try{
      const SeriesService1 = new SeriesService();
         const resp1=await SeriesService1.seriesDetails(211);
@@ -33,7 +33,7 @@ test ('get details of the series', async(done)=>{
         done.fail(error)
     }
 })
-test ('get api to get series cast details', async(done)=>{
+test ('api to get series Casts details', async(done)=>{
     try{
      const SeriesService1 = new SeriesService();
         const response=await SeriesService1.seriesCastDetails(211);

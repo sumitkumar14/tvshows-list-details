@@ -12,10 +12,4 @@ describe('Seriesist.vue', () => {
   it('renders a vue instance of series list view', () => {
     expect(wrapper.isVueInstance()).toBe(true);
   });
-//   it('renders data when passed', () => {
-//     const wrapper = shallowMount(Seriesist, {
-//       propsData: { movieDetails }
-//     })
-//     expect(wrapper.props().movieDetails).toBe(movieDetails)
-//   })
 })

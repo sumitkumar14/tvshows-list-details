@@ -13,10 +13,4 @@ describe('SeriesDetails.vue', () => {
   it('renders a vue instance of series Details view', () => {
     expect(wrapper.isVueInstance()).toBe(true);
   });
-  // it('renders props.movieDetails when passed', () => {
-  //   const wrapper = shallowMount(SeriesDetails, {
-  //     propsData: { movieDetails }
-  //   })
-  //   expect(wrapper.props().movieDetails).toBe(movieDetails)
-  // })
 })
