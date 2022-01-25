@@ -1,6 +1,6 @@
 <template>
   <v-container fluid class="px-6 mt-2">
-    <v-row no-gutters>
+    <v-row v-if="!loading" no-gutters>
       <div class="d-flex" shrink cols="1">
         <v-btn class="mb-0 mr-1" :title="home" icon @click="backClick()" color="black" dark>
           <v-icon dark left> mdi-arrow-left </v-icon>
@@ -203,6 +203,11 @@
         </v-col>
       </v-col>
     </v-row>
+    <v-row v-else justify="space-between space-around">
+        <v-col class="center-text">
+          <h2>Loading in progress ...</h2>
+        </v-col>
+      </v-row>
   </v-container>
 </template>
 <script>
@@ -229,6 +234,7 @@ export default {
       ],
       showDetails: {},
       castDetail: [],
+      loading:false,
       episodes: [],
       paginateData: [],
       limitedcastDetail: [],
@@ -251,13 +257,14 @@ export default {
     /* get api call to fetch the episodes of tv series */
 
     detailsfShow() {
+      this.loading=true;
       SeriesService1.seriesDetails(this.seriesId)
         .then((response) => {
           this.showDetails = response.data;
         })
         .catch((error) => {
           console.log(error);
-        })
+        }).finally(()=>{this.loading=false;})
     },
 
     /* get api call to fetch the casting details of tv series */
@@ -307,5 +314,11 @@ export default {
 .url-look {
   word-wrap: break-all;
   cursor: pointer;
+}
+.center-text {
+  height: calc(100vh - 128px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>
