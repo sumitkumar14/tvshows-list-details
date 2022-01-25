@@ -54,7 +54,7 @@
                         color="orange"
                         v-for="(day, i) in showDetails.schedule.days"
                         :key="i"
-                        >{{ day }}</v-chip
+                        ><b>{{ day }}</b></v-chip
                       >
                     </p>
                     |
@@ -112,7 +112,7 @@
                         color="orange"
                         v-for="(genre, i) in showDetails.genres"
                         :key="i"
-                        >{{ genre }}</v-chip
+                        ><b>{{ genre }}</b></v-chip
                       >
                     </p>
                   </v-row>
@@ -150,7 +150,7 @@
                 </template>
                 <template v-slot:[`item.rating.average`]="{ item }">
                   <div class="pt-2">
-                    <v-icon color="yellow" dark> mdi-star </v-icon>
+                    <v-icon color="orange" dark> mdi-star </v-icon>
                     {{
                       item.rating.average
                         ? (item.rating.average / 2).toFixed(1)
