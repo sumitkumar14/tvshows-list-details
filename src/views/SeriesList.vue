@@ -18,17 +18,17 @@
     <span v-if="!SearchedShow.length">
       <v-row no-gutters>
         <v-expansion-panels>
-          <v-expansion-panel  class="mt-4"
+          <v-expansion-panel
+            class="mt-4"
             @click.once="getDiffGenresShows"
             v-for="(item, i) in differentGenres"
             :key="i"
           >
-            <v-expansion-panel-header style="background-color:#1976d2 !important" height="150"
-              ><h2 class="white--text">{{ item.label }}</h2><template v-slot:actions>
-            <v-icon color="white">
-              $expand
-            </v-icon>
-          </template></v-expansion-panel-header
+            <v-expansion-panel-header class="exp-header-background" height="150"
+              ><h2 class="white--text">{{ item.label }}</h2>
+              <template v-slot:actions>
+                <v-icon color="white"> $expand </v-icon>
+              </template></v-expansion-panel-header
             >
             <v-expansion-panel-content class="pt-4">
               <v-row>
@@ -39,7 +39,7 @@
                   sm="4"
                   md="2"
                 >
-                  <show-card :showInfo="show" @card-click="cardClickedEvent"/>
+                  <show-card :showInfo="show" @card-click="cardClickedEvent" />
                 </v-col>
               </v-row>
             </v-expansion-panel-content>
@@ -61,24 +61,14 @@
       </v-row>
       <v-row v-else-if="loading" justify="space-between space-around">
         <v-col
-          style="
-            height: calc(100vh - 128px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-          "
+          class="center-text"
         >
           <h2>Loading in progress ...</h2>
         </v-col>
       </v-row>
       <v-row v-else justify="space-between space-around">
         <v-col
-          style="
-            height: calc(100vh - 128px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-          "
+        class="center-text"
         >
           <h2>No Data Found</h2>
         </v-col>
@@ -95,7 +85,7 @@ const SeriesService1 = new SeriesService();
 export default {
   name: "SeriesList",
   components: {
-    ShowCard
+    ShowCard,
   },
   data() {
     return {
@@ -122,11 +112,11 @@ export default {
     };
   },
   methods: {
-    cardClickedEvent(v){
-        this.$router.push({ path: `/SeriesDetails/${v}` });
+    cardClickedEvent(v) {
+      this.$router.push({ path: `/SeriesDetails/${v}` });
     },
     clearMessage() {
-      this.SearchedShow="";
+      this.SearchedShow = "";
     },
 
     /* get api call to fetch the list of tv series */
@@ -150,7 +140,7 @@ export default {
     },
 
     /* filters for shows on different genres */
-    
+
     getDiffGenresShows() {
       this.differentGenres[0].filterdShows = this.showsData.filter((show) =>
         show.genres.includes("Comedy")
@@ -208,3 +198,14 @@ export default {
   },
 };
 </script>
+<style scoped>
+.exp-header-background {
+  background-color: #1976d2 !important;
+}
+.center-text{
+  height: calc(100vh - 128px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+}
+</style>
