@@ -20,7 +20,7 @@
         <v-expansion-panels>
           <v-expansion-panel
             class="mt-4"
-            @click.once="getDiffGenresShows"
+            @click="getDiffGenresShows"
             v-for="(item, i) in differentGenres"
             :key="i"
           >
@@ -48,7 +48,7 @@
       </v-row>
     </span>
     <v-row no-gutters class="mt-4" v-else>
-      <v-row  v-if="!loading && searchedshowsData && searchedshowsData.length">
+      <v-row  v-if="!loading && searchedshowsData && searchedshowsData[0] && searchedshowsData[0].length">
         <v-col
           v-for="item in searchedshowsData[0]"
           :key="item.id"

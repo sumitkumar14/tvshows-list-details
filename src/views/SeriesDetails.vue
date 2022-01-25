@@ -2,20 +2,25 @@
   <v-container fluid class="px-6 mt-2">
     <v-row v-if="!loading" no-gutters>
       <div class="d-flex" shrink cols="1">
-        <v-btn class="mb-0 mr-1" :title="home" icon @click="backClick()" color="black" dark>
+        <v-btn
+          class="mb-0 mr-1"
+          :title="home"
+          icon
+          @click="backClick()"
+          color="black"
+          dark
+        >
           <v-icon dark left> mdi-arrow-left </v-icon>
         </v-btn>
       </div>
       <v-col>
         <h2 class="mb-2">{{ showDetails.name }}</h2>
         <v-row no-gutters>
-          <ShowCard class="mr-4 mb-4" :showInfo="showDetails"> </ShowCard>
-          <v-col>
+          <ShowCard  class="mr-4 mb-4" :showInfo="showDetails"> </ShowCard>
+          <v-col xs="12" :sm="$vuetify.breakpoint.mobile?'12':''">
             <v-row no-gutters>
               <v-col cols="12">
-                <div
-                  v-html="showDetails.summary"
-                ></div>
+                <div class="summary-div" v-html="showDetails.summary"></div>
               </v-col>
               <v-col cols="12">
                 <v-card
@@ -92,9 +97,9 @@
                     </p>
                     |
                     <p class="mx-3">
-                      <b>Run time:</b>&nbsp;<span class="show-info-txt">{{
-                        showDetails.runtime
-                      }}&nbsp;min</span>
+                      <b>Run time:</b>&nbsp;<span class="show-info-txt"
+                        >{{ showDetails.runtime }}&nbsp;min</span
+                      >
                     </p>
                     |
                     <p class="mx-3">
@@ -132,20 +137,16 @@
                 class="elevation-2"
               >
                 <template v-slot:[`item.name`]="{ item }">
-                  <div class="pt-2">
+                  <div class="episode-name-col pt-2">
                     <b>{{ item.name }}</b
-                    ><a
-                      style="cursor: pointer"
-                      :href="item.url"
-                    >
+                    ><a style="cursor: pointer" :href="item.url">
                       <v-img
-                      class="mb-1"
-                      width="80"
-                      height="60"
-                      alt
-                      :src="item.image.medium"
-                    /></a
-                    >
+                        class="mb-1"
+                        width="80"
+                        height="60"
+                        alt
+                        :src="item.image.medium"
+                    /></a>
                   </div>
                 </template>
                 <template v-slot:[`item.rating.average`]="{ item }">
@@ -204,10 +205,10 @@
       </v-col>
     </v-row>
     <v-row v-else justify="space-between space-around">
-        <v-col class="center-text">
-          <h2>Loading in progress ...</h2>
-        </v-col>
-      </v-row>
+      <v-col class="center-text">
+        <h2>Loading in progress ...</h2>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 <script>
@@ -234,11 +235,11 @@ export default {
       ],
       showDetails: {},
       castDetail: [],
-      loading:false,
+      loading: false,
       episodes: [],
       paginateData: [],
       limitedcastDetail: [],
-      enableViewCastButton: true
+      enableViewCastButton: true,
     };
   },
   computed: {
@@ -257,25 +258,30 @@ export default {
     /* get api call to fetch the episodes of tv series */
 
     detailsfShow() {
-      this.loading=true;
+      this.loading = true;
       SeriesService1.seriesDetails(this.seriesId)
         .then((response) => {
           this.showDetails = response.data;
         })
         .catch((error) => {
           console.log(error);
-        }).finally(()=>{this.loading=false;})
+        })
+        .finally(() => {
+          this.loading = false;
+        });
     },
 
     /* get api call to fetch the casting details of tv series */
 
     getCastingDetails() {
-      SeriesService1.seriesCastDetails(this.seriesId).then((response) => {
-        this.castDetail = response.data;
-        this.limitedcastDetail = response.data.slice(0, 6);
-      }).catch((error) => {
-          console.log(error);
+      SeriesService1.seriesCastDetails(this.seriesId)
+        .then((response) => {
+          this.castDetail = response.data;
+          this.limitedcastDetail = response.data.slice(0, 6);
         })
+        .catch((error) => {
+          console.log(error);
+        });
     },
     viewMoreLessCast() {
       this.limitedcastDetail = [];
@@ -288,11 +294,13 @@ export default {
     /* get api call to fetch the episodes of tv series */
 
     getEpisodes() {
-      SeriesService1.seriesEpisodesDetails(this.seriesId).then((response) => {
-        this.episodes = response.data;
-      }).catch((error) => {
-          console.log(error);
+      SeriesService1.seriesEpisodesDetails(this.seriesId)
+        .then((response) => {
+          this.episodes = response.data;
         })
+        .catch((error) => {
+          console.log(error);
+        });
     },
   },
   mounted() {
@@ -308,7 +316,7 @@ export default {
 }
 .show-info-txt {
   font-size: 14px;
-  color:grey;
+  color: grey;
   font-weight: bold;
 }
 .url-look {
@@ -320,5 +328,12 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.summary-div {
+  font-size: 14px;
+}
+.episode-name-col {
+  min-height: 80px;
+  min-width:160px;
 }
 </style>
