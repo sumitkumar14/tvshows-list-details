@@ -94,7 +94,7 @@
                     <p class="mx-3">
                       <b>Run time:</b>&nbsp;<span class="show-info-txt">{{
                         showDetails.runtime
-                      }}</span>
+                      }}&nbsp;min</span>
                     </p>
                     |
                     <p class="mx-3">
