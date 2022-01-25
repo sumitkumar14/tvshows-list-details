@@ -142,29 +142,9 @@ export default {
     /* filters for shows on different genres */
 
     getDiffGenresShows() {
-      this.differentGenres[0].filterdShows = this.showsData.filter((show) =>
-        show.genres.includes("Comedy")
-      );
-      this.differentGenres[6].filterdShows = this.showsData.filter((show) =>
-        show.genres.includes("Legal")
-      );
-      this.differentGenres[2].filterdShows = this.showsData.filter((show) =>
-        show.genres.includes("Family")
-      );
-      this.differentGenres[7].filterdShows = this.showsData.filter((show) =>
-        show.genres.includes("Fantasy")
-      );
-      this.differentGenres[1].filterdShows = this.showsData.filter((show) =>
-        show.genres.includes("Drama")
-      );
-      this.differentGenres[4].filterdShows = this.showsData.filter((show) =>
-        show.genres.includes("Medical")
-      );
-      this.differentGenres[5].filterdShows = this.showsData.filter((show) =>
-        show.genres.includes("Crime")
-      );
-      this.differentGenres[3].filterdShows = this.showsData.filter((show) =>
-        show.genres.includes("Romance")
+      for(let i=0; i<this.differentGenres.length;i++)
+      this.differentGenres[i].filterdShows = this.showsData.filter((show) =>
+        show.genres.includes(this.differentGenres[i].label)
       );
     },
 

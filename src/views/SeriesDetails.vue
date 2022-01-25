@@ -80,7 +80,7 @@
                     </p>
                     |
                     <p class="mx-3">
-                      <b>Show Type:</b>&nbsp;<span class="show-info-txt">{{
+                      <b>Show type:</b>&nbsp;<span class="show-info-txt">{{
                         showDetails.type
                       }}</span>
                     </p>
@@ -92,7 +92,7 @@
                     </p>
                     |
                     <p class="mx-3">
-                      <b>Run Time:</b>&nbsp;<span class="show-info-txt">{{
+                      <b>Run time:</b>&nbsp;<span class="show-info-txt">{{
                         showDetails.runtime
                       }}</span>
                     </p>
