@@ -237,8 +237,7 @@ export default {
       episodes: [],
       paginateData: [],
       limitedcastDetail: [],
-      enableViewCastButton: true,
-      collectionSize: 0,
+      enableViewCastButton: true
     };
   },
   computed: {
@@ -272,7 +271,9 @@ export default {
       SeriesService1.seriesCastDetails(this.seriesId).then((response) => {
         this.castDetail = response.data;
         this.limitedcastDetail = response.data.slice(0, 6);
-      });
+      }).catch((error) => {
+          console.log(error);
+        });;
     },
     viewMoreLessCast() {
       this.limitedcastDetail = [];
@@ -287,8 +288,9 @@ export default {
     getEpisodes() {
       SeriesService1.seriesEpisodesDetails(this.seriesId).then((response) => {
         this.episodes = response.data;
-        this.collectionSize = this.episodes.length;
-      });
+      }).catch((error) => {
+          console.log(error);
+        });
     },
   },
   mounted() {
