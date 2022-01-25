@@ -135,7 +135,7 @@
                   <div class="pt-2">
                     <b>{{ item.name }}</b
                     ><a
-                      style="word-wrap: break-all; cursor: pointer"
+                      style="cursor: pointer"
                       :href="item.url"
                     >
                       <v-img
