@@ -2,14 +2,14 @@
   <v-container fluid class="px-6 mt-2">
     <v-row no-gutters>
       <div class="d-flex" shrink cols="1">
-        <v-btn class="mb-0 mr-1" icon @click="backClick()" color="black" dark>
+        <v-btn class="mb-0 mr-1" :title="home" icon @click="backClick()" color="black" dark>
           <v-icon dark left> mdi-arrow-left </v-icon>
         </v-btn>
       </div>
       <v-col>
         <h2 class="mb-2">{{ showDetails.name }}</h2>
         <v-row no-gutters>
-          <ShowCard class="mr-4" :showInfo="showDetails"> </ShowCard>
+          <ShowCard class="mr-4 mb-4" :showInfo="showDetails"> </ShowCard>
           <v-col>
             <v-row no-gutters>
               <v-col cols="12">
@@ -19,7 +19,7 @@
               </v-col>
               <v-col cols="12">
                 <v-card
-                  class="pa-2"
+                  class="pa-2 mb-4"
                   v-if="showDetails && Object.keys(showDetails).length"
                 >
                   <v-card-title class="pl-3 pt-0">
@@ -122,7 +122,7 @@
           </v-col>
         </v-row>
         <v-row no-gutters>
-          <v-col class="pl-0 ml-0 my-4" cols="12"><h3>Episodes</h3></v-col>
+          <v-col class="pl-0 ml-0 mb-4" cols="12"><h3>Episodes</h3></v-col>
           <v-row stretch no-gutters>
             <v-container class="pa-0" fluid>
               <v-data-table
