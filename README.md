@@ -1,4 +1,9 @@
 # tvshows-list-details
+## About
+```
+Application is built using Vue.js a progressive javascript framework create by Evan You.We used vue.js over other frameworks because of its complete easy to use ecosystem, fast compilation, easy learning curve and its easy to use syntax which gives upper hand over other frameworks in writing code faster.Application is about the tv shows on different genres and user can see the details about the particular show as well as search a show using its name.
+
+```
 
 ## Project setup
 ```

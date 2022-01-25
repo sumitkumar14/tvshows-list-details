@@ -6,7 +6,7 @@
       dark
     >
       <div class="d-flex align-center">
-        <h2>Amazing TV Shows</h2>
+        <h2><v-icon class="mb-1 mr-1">mdi-television</v-icon>TV Shows</h2>
       </div>
     </v-app-bar>
     <v-main>
