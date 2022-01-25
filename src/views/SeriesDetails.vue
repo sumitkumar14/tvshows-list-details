@@ -13,60 +13,107 @@
           <v-col>
             <v-row no-gutters>
               <v-col cols="12">
-                <div style="font-size: 19px" v-html="showDetails.summary"></div>
+                <div
+                  v-html="showDetails.summary"
+                ></div>
               </v-col>
               <v-col cols="12">
                 <v-card
                   class="pa-2"
                   v-if="showDetails && Object.keys(showDetails).length"
                 >
-                  <v-card-title class="pl-3 pt-0"> Show Info</v-card-title>
+                  <v-card-title class="pl-3 pt-0">
+                    Show Information</v-card-title
+                  >
                   <v-row no-gutters>
                     <p
                       v-if="showDetails.network && showDetails.network.country"
                       class="mx-3"
                     >
-                      <b>Country:</b>&nbsp;{{
+                      <b>Country:</b>&nbsp;<span class="show-info-txt">{{
                         showDetails.network.country.name
-                      }}
+                      }}</span>
+                    </p>
+                    |
+                    <p
+                      v-if="showDetails.network && showDetails.network.name"
+                      class="mx-3"
+                    >
+                      <b>Network:</b>&nbsp;<span class="show-info-txt">{{
+                        showDetails.network.name
+                      }}</span>
                     </p>
                     |
                     <p
                       v-if="showDetails.network && showDetails.network.country"
                       class="mx-3"
                     >
-                      <b>Network:</b>&nbsp;{{ showDetails.network.name }}
+                      <b>Days:</b>&nbsp;<v-chip
+                        class="mr-1"
+                        small
+                        color="orange"
+                        v-for="(day, i) in showDetails.schedule.days"
+                        :key="i"
+                        >{{ day }}</v-chip
+                      >
+                    </p>
+                    |
+                    <p
+                      v-if="showDetails.network && showDetails.network.country"
+                      class="mx-3"
+                    >
+                      <b>Time:</b>&nbsp;<span class="show-info-txt">{{
+                        showDetails.schedule.time
+                      }}</span>
                     </p>
                     |
                     <p class="mx-3">
-                      <b>Language:</b>&nbsp;{{ showDetails.language }}
+                      <b>Language:</b>&nbsp;<span class="show-info-txt">{{
+                        showDetails.language
+                      }}</span>
                     </p>
                     |
                     <p class="mx-3">
-                      <b>Status:</b>&nbsp;{{ showDetails.status }}
+                      <b>Status:</b>&nbsp;<span class="show-info-txt">{{
+                        showDetails.status
+                      }}</span>
                     </p>
                     |
                     <p class="mx-3">
-                      <b>Show Type:</b>&nbsp;{{ showDetails.type }}
+                      <b>Show Type:</b>&nbsp;<span class="show-info-txt">{{
+                        showDetails.type
+                      }}</span>
                     </p>
                     |
                     <p class="mx-3">
-                      <b>Premiered:</b>&nbsp;{{ showDetails.premiered }}
+                      <b>Premiered:</b>&nbsp;<span class="show-info-txt">{{
+                        showDetails.premiered
+                      }}</span>
                     </p>
                     |
                     <p class="mx-3">
-                      <b>Run Time:</b>&nbsp;{{ showDetails.runtime }}
+                      <b>Run Time:</b>&nbsp;<span class="show-info-txt">{{
+                        showDetails.runtime
+                      }}</span>
                     </p>
                     |
                     <p class="mx-3">
                       <b>Official URL :</b>
-                      <a style="word-wrap: break-all; cursor:pointer" :href="showDetails.officialSite">
+                      <a class="url-look" :href="showDetails.officialSite">
                         {{ showDetails.officialSite }}</a
                       >
                     </p>
                     |
                     <p class="mx-3">
-                      <b style="color: black">Genres:&nbsp;</b><v-chip class="mr-1" small color="red" v-for="(genre,i) in showDetails.genres" :key="i">{{genre}}</v-chip>
+                      <b>Genres:&nbsp;</b
+                      ><v-chip
+                        class="mr-1"
+                        small
+                        color="orange"
+                        v-for="(genre, i) in showDetails.genres"
+                        :key="i"
+                        >{{ genre }}</v-chip
+                      >
                     </p>
                   </v-row>
                 </v-card>
@@ -76,36 +123,48 @@
         </v-row>
         <v-row no-gutters>
           <v-col class="pl-0 ml-0 my-4" cols="12"><h3>Episodes</h3></v-col>
-          <v-row fluid no-gutters>
-            <v-data-table
-              :headers="headers"
-              :items="episodes"
-              :items-per-page="10"
-              class="elevation-1"
-            >
-             <template v-slot:[`item.name`]="{ item }">
-                <div class="pt-2">
-                 <b>{{item.name}}</b><v-img class="mb-1" width="80" height="60" alt :src="item.image.medium" />
-                </div>
-              </template>
-              <template v-slot:[`item.rating`]="{ item }">
-                <div class="pt-2">
-                  <v-icon color="yellow" dark> mdi-star </v-icon>
-                  {{
-                    item.rating.average
-                      ? (item.rating.average / 2).toFixed(1)
-                      : 0
-                  }}/5
-                </div>
-              </template>
-              <template v-slot:[`item._links`]="{ item }">
-                <div class="pt-2">
-                   <a style="word-wrap: break-all; cursor:pointer" :href="item._links.self.href">
-                        {{ item._links.self.href}}</a
-                      >
-                </div>
-              </template>
-            </v-data-table>
+          <v-row stretch no-gutters>
+            <v-container class="pa-0" fluid>
+              <v-data-table
+                :headers="headers"
+                :items="episodes"
+                :items-per-page="10"
+                class="elevation-2"
+              >
+                <template v-slot:[`item.name`]="{ item }">
+                  <div class="pt-2">
+                    <b>{{ item.name }}</b
+                    ><v-img
+                      class="mb-1"
+                      width="80"
+                      height="60"
+                      alt
+                      :src="item.image.medium"
+                    />
+                  </div>
+                </template>
+                <template v-slot:[`item.rating.average`]="{ item }">
+                  <div class="pt-2">
+                    <v-icon color="yellow" dark> mdi-star </v-icon>
+                    {{
+                      item.rating.average
+                        ? (item.rating.average / 2).toFixed(1)
+                        : 0
+                    }}/5
+                  </div>
+                </template>
+                <template v-slot:[`item._links`]="{ item }">
+                  <div class="pt-2">
+                    <a
+                      style="word-wrap: break-all; cursor: pointer"
+                      :href="item._links.self.href"
+                    >
+                      {{ item._links.self.href }}</a
+                    >
+                  </div>
+                </template>
+              </v-data-table>
+            </v-container>
           </v-row>
         </v-row>
         <v-col class="pl-0 ml-0 mb-2" cols="12"><h3>Cast Details</h3></v-col>
@@ -154,7 +213,7 @@
 <script>
 // import ShowCard from "../components/ShowCard";
 import SeriesService from "@/seriesService/tv-service.js";
-import ShowCard from '../components/ShowCard.vue';
+import ShowCard from "../components/ShowCard.vue";
 const SeriesService1 = new SeriesService();
 export default {
   name: "SeriesDetails",
@@ -172,8 +231,7 @@ export default {
         { text: "Run Time", value: "runtime" },
         { text: "Type", value: "type" },
         { text: "Air Date", value: "airdate" },
-        { text: "Run time", value: "runtime" },
-        { text: "Ratings", value: "rating" },
+        { text: "Ratings", value: "rating.average" },
       ],
       showDetails: {},
       castDetail: [],
@@ -181,8 +239,6 @@ export default {
       paginateData: [],
       limitedcastDetail: [],
       enableViewCastButton: true,
-      page: 1,
-      pageSize: 10,
       collectionSize: 0,
     };
   },
@@ -210,12 +266,6 @@ export default {
           console.log(error);
         });
     },
-    getPaginatedData() {
-      this.paginateData = this.episodes.slice(
-        (this.page - 1) * this.pageSize,
-        (this.page - 1) * this.pageSize + this.pageSize
-      );
-    },
 
     /* get api call to fetch the casting details of tv series */
 
@@ -239,7 +289,7 @@ export default {
       SeriesService1.seriesEpisodesDetails(this.seriesId).then((response) => {
         this.episodes = response.data;
         this.collectionSize = this.episodes.length;
-        this.getPaginatedData();
+        // this.getPaginatedData();
       });
     },
   },
@@ -253,5 +303,14 @@ export default {
 <style scoped>
 .small-text-size {
   font-size: 12px;
+}
+.show-info-txt {
+  font-size: 14px;
+  color:grey;
+  font-weight: bold;
+}
+.url-look {
+  word-wrap: break-all;
+  cursor: pointer;
 }
 </style>

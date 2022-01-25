@@ -48,7 +48,7 @@
       </v-row>
     </span>
     <v-row v-else>
-      <v-row v-if="!loading && showsData && showsData.length">
+      <v-row v-if="!loading && searchedshowsData && searchedshowsData.length">
         <v-col
           v-for="item in searchedshowsData"
           :key="item.id"
