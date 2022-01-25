@@ -127,7 +127,6 @@ export default {
     },
     clearMessage() {
       this.SearchedShow="";
-      // this.getTvSeriesData();
     },
 
     /* get api call to fetch the list of tv series */
@@ -151,6 +150,7 @@ export default {
     },
 
     /* filters for shows on different genres */
+    
     getDiffGenresShows() {
       this.differentGenres[0].filterdShows = this.showsData.filter((show) =>
         show.genres.includes("Comedy")

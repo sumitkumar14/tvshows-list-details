@@ -211,7 +211,6 @@
   </v-container>
 </template>
 <script>
-// import ShowCard from "../components/ShowCard";
 import SeriesService from "@/seriesService/tv-service.js";
 import ShowCard from "../components/ShowCard.vue";
 const SeriesService1 = new SeriesService();
@@ -289,7 +288,6 @@ export default {
       SeriesService1.seriesEpisodesDetails(this.seriesId).then((response) => {
         this.episodes = response.data;
         this.collectionSize = this.episodes.length;
-        // this.getPaginatedData();
       });
     },
   },
