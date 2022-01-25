@@ -50,13 +50,13 @@
     <v-row v-else>
       <v-row v-if="!loading && searchedshowsData && searchedshowsData.length">
         <v-col
-          v-for="item in searchedshowsData"
+          v-for="item in searchedshowsData[0]"
           :key="item.id"
           xs="12"
           sm="6"
           md="2"
         >
-          <show-card :showInfo="item" @card-click="cardClickedEvent" />
+          <show-card :showInfo="item.show" @card-click="cardClickedEvent" />
         </v-col>
       </v-row>
       <v-row v-else-if="loading" justify="space-between space-around">
