@@ -134,13 +134,18 @@
                 <template v-slot:[`item.name`]="{ item }">
                   <div class="pt-2">
                     <b>{{ item.name }}</b
-                    ><v-img
+                    ><a
+                      style="word-wrap: break-all; cursor: pointer"
+                      :href="item.url"
+                    >
+                      <v-img
                       class="mb-1"
                       width="80"
                       height="60"
                       alt
                       :src="item.image.medium"
-                    />
+                    /></a
+                    >
                   </div>
                 </template>
                 <template v-slot:[`item.rating.average`]="{ item }">
@@ -151,16 +156,6 @@
                         ? (item.rating.average / 2).toFixed(1)
                         : 0
                     }}/5
-                  </div>
-                </template>
-                <template v-slot:[`item._links`]="{ item }">
-                  <div class="pt-2">
-                    <a
-                      style="word-wrap: break-all; cursor: pointer"
-                      :href="item._links.self.href"
-                    >
-                      {{ item._links.self.href }}</a
-                    >
                   </div>
                 </template>
               </v-data-table>
