@@ -17,10 +17,9 @@
     </v-row>
     <span v-if="!SearchedShow.length">
       <v-row no-gutters>
-        <v-expansion-panels>
+        <v-expansion-panels  v-model="panel">
           <v-expansion-panel
             class="mt-4"
-            @click="getDiffGenresShows"
             v-for="(item, i) in differentGenres"
             :key="i"
           >
@@ -109,6 +108,7 @@ export default {
         { label: "Legal", filterdShows: [] },
         { label: "Fantasy", filterdShows: [] },
       ],
+      panel:0,
       showsData: [],
       crimeShows: [],
       SearchedShow: "",
@@ -140,6 +140,7 @@ export default {
         })
         .finally(() => {
           this.loading = false;
+          this.getDiffGenresShows();
         });
     },
 

@@ -17,7 +17,7 @@
         <h2 class="mb-2">{{ showDetails.name }}</h2>
         <v-row no-gutters>
           <ShowCard class="mr-4 mb-4" :showInfo="showDetails"> </ShowCard>
-          <v-col xs="12" :sm="$vuetify.breakpoint.mobile ? '12' : ''">
+          <v-col xs="12" :sm="$vuetify.breakpoint && $vuetify.breakpoint.mobile ? '12' : ''">
             <v-row no-gutters>
               <v-col cols="12">
                 <div class="summary-div" v-html="showDetails.summary"></div>
