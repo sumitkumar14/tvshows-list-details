@@ -36,5 +36,11 @@ npm run test:unit
 npm run lint
 ```
 
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### url to access this Website on production
+```
+https://proud-rock-0ba153110.4.azurestaticapps.net/#/
+```
